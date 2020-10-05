@@ -10,7 +10,7 @@ test: clean
 	python3 manage.py test
 
 image: total-clean
-	docker build -t legends.azurecr.io/legends-backend -f docker/Dockerfile .
+	docker build -t benkyou_image -f docker/Dockerfile .
 
 coverage: clean
 	coverage run --source='.' --branch --omit="*/migrations/*","*/settings.py","*/wsgi.py","*/apps.py","manage.py" manage.py test

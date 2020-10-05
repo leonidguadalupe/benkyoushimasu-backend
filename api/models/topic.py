@@ -31,17 +31,20 @@ class Topic(BaseModel):
 
     # reading can be a phoneme if used in terms as hiragana or katakana topic
     reading = models.ManyToManyField('Reading', blank=True, related_name='topic_reading')
+
+    # Source refers to the source where this topic has been taken from.
+    # It could be a title of a book or an online resource.
+    # Source field is required. Add a GENERAL named source when deploying this project.
     source = models.ForeignKey(
-        'Source',
-        null=True, default=None, on_delete=models.CASCADE,
-        related_name='topics', blank=True
+        'Source', on_delete=models.CASCADE,
+        related_name='topics',
     )
 
     # Flags for topics
     show_furigana = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = "branch"
-        verbose_name_plural = "branches"
-        ordering = ['name', 'code']
-        unique = ['code']
+        verbose_name = "topic"
+        verbose_name_plural = "topics"
+        ordering = ['topic_type', 'title']
+        unique = ['title']
