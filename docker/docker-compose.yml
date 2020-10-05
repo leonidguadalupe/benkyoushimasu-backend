@@ -1,0 +1,35 @@
+version: "2"
+
+volumes:
+    benkyoushimasu_logs:
+        external: true
+
+    benkyoushimasu_db:
+        external: true
+
+services:
+
+    db:
+        container_name: postgres
+        image: postgres:latest
+        ports:
+            - "5432:5432"
+        env_file: ../database.config
+        volumes:
+            - benkyoushimasu_db:/var/lib/postgresql
+    app:
+        build:
+            context: "../"
+            dockerfile: docker/Dockerfile
+        restart: always
+        depends_on:
+            - db
+        container_name: benkyoushimasu_app
+        links:
+            - db
+        ports:
+            - "8000:8000"
+        volumes:
+            - ../:/code
+            - benkyoushimasu_logs:/var/log
+        command: python3 manage.py runserver 0.0.0.0:8000

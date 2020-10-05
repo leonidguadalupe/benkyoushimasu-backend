@@ -1,0 +1,10 @@
+database.config
+static
+!api/static/
+.coverage
+htmlcov/
+**/__pycache__/
+tags
+.env
+*DS_Store
+*vscode
