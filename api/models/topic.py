@@ -47,4 +47,3 @@ class Topic(BaseModel):
         verbose_name = "topic"
         verbose_name_plural = "topics"
         ordering = ['topic_type', 'title']
-        unique = ['title']

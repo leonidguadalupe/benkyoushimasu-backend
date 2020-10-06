@@ -3,7 +3,7 @@ from django.db import models
 from .base import BaseModel
 
 class Note(BaseModel):
-    topic = models.ForeignKey('Topic', related_name='notes')
+    topic = models.ForeignKey('Topic', related_name='notes', on_delete=models.CASCADE)
     notes = models.CharField(max_length=128)
 
     class Meta:

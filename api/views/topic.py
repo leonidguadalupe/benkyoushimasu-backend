@@ -7,9 +7,10 @@ from django.http import Http404
 from django.db.models import Q
 from random import shuffle
 from rest_framework import viewsets, status
+from rest_framework.decorators import action
 
 from api.models import Topic
-from api.serializers import TopicSerializer, NoteSerializer,
+from api.serializers import TopicSerializer
 
 class TopicViewSet(viewsets.ViewSet):
     queryset = Topic.objects.all()

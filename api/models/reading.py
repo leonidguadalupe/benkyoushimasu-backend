@@ -14,11 +14,10 @@ class Reading(BaseModel):
     )
 
     reading_type = models.CharField(choices=READING_TYPES, default='vocabulary', max_length=64)
-    pronunciation = models.CharField(max_length=128)
+    pronunciation = models.CharField(max_length=128, unique=True)
     furigana = models.CharField(max_length=128, blank=True, null=True)
 
     class Meta:
         verbose_name = "reading"
         verbose_name_plural = "readings"
         ordering = ['reading_type', 'pronunciation']
-        unique = ['pronunciation']
