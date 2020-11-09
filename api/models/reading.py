@@ -21,3 +21,6 @@ class Reading(BaseModel):
         verbose_name = "reading"
         verbose_name_plural = "readings"
         ordering = ['reading_type', 'pronunciation']
+
+    def __unicode__(self):
+        return u'%s' % (self.pronunciation)

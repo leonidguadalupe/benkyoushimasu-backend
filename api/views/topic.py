@@ -8,6 +8,7 @@ from django.db.models import Q
 from random import shuffle
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from api.models import Topic
 from api.serializers import TopicSerializer
@@ -21,12 +22,12 @@ class TopicViewSet(viewsets.ViewSet):
             return Topic.objects.get(id=id)
         except Topic.DoesNotExist:
             raise Http404
-
+    
+    @action(detail=True, url_path='topics', url_name='topics', methods=['get'])
     def list(self, request):
         topics = Topic.objects.all()
-        serializer = serializer_class(data=topics, many=True)
-        # randomize list of topics
-        return Response(shuffle(serializer.data), status=status.HTTP_200_OK)
+        serializer = self.serializer_class(topics, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['post'])
     def create(self, request):
